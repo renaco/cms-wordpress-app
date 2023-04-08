@@ -2,7 +2,9 @@ on: push
 name: Deploy website on push
 jobs:
   web-deploy:
-    name:
+    name: cms-wordpress-app
+    env:
+      WORDPRESS_API_URL: ${{ secrets.WORDPRESS_API_URL }}
     runs-on: ubuntu-latest
     steps:
       - name: Get latest code
@@ -10,8 +12,8 @@ jobs:
 
       - name: Build project
         run: |
-          npm install
-          npm run build
+          yarn install
+          yarn run build
 
       - name: Sync files
         uses: SamKirkland/FTP-Deploy-Action@4.0.0
